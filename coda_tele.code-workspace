@@ -1,0 +1,225 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "coda tele",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CODA_ADL_WatchingTV_queves",
+                    "slots": [
+                        {
+                            "name": "SI_NO",
+                            "type": "sCODA_SINO"
+                        },
+                        {
+                            "name": "TV_program",
+                            "type": "sCODA_tv_program",
+                            "samples": [
+                                "no lo sé",
+                                "anuncios",
+                                "nada ",
+                                "Estoy viendo {TV_program}",
+                                "{TV_program}"
+                            ]
+                        },
+                        {
+                            "name": "TV_movie_name",
+                            "type": "AMAZON.Movie"
+                        },
+                        {
+                            "name": "TV_serie_name",
+                            "type": "AMAZON.TVSeries"
+                        }
+                    ],
+                    "samples": [
+                        "{SI_NO} estoy viendo {TV_program}",
+                        "{SI_NO} quiero ver {TV_program}",
+                        "{SI_NO} voy a ver {TV_program}",
+                        "{TV_program} {TV_movie_name}",
+                        "{TV_program} {TV_serie_name}",
+                        "{TV_program}",
+                        "{SI_NO} {TV_program}",
+                        "{SI_NO}",
+                        "Estoy viendo la tele",
+                        "Ver la tele"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "sCODA_tv_program",
+                    "values": [
+                        {
+                            "id": "serie",
+                            "name": {
+                                "value": "una serie",
+                                "synonyms": [
+                                    "la serie"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "news",
+                            "name": {
+                                "value": "las noticias",
+                                "synonyms": [
+                                    "noticias",
+                                    "el telediario"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "movie",
+                            "name": {
+                                "value": "una película",
+                                "synonyms": [
+                                    "la película",
+                                    "una peli"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tv_report",
+                            "name": {
+                                "value": "un documental",
+                                "synonyms": [
+                                    "el documental",
+                                    "un reportaje"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sCODA_SINO",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "no",
+                                "synonyms": [
+                                    "no creo",
+                                    "pues no"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "si",
+                                "synonyms": [
+                                    "claro"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "CODA_ADL_WatchingTV_queves",
+                    "delegationStrategy": "SKILL_RESPONSE",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "SI_NO",
+                            "type": "sCODA_SINO",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1077719766607.1368752108473"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isInSet",
+                                    "prompt": "Slot.Validation.799952979185.1170519432461.109568016974",
+                                    "values": [
+                                        "no",
+                                        "si"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "TV_program",
+                            "type": "sCODA_tv_program",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.741962273665.1181978137326"
+                            }
+                        },
+                        {
+                            "name": "TV_movie_name",
+                            "type": "AMAZON.Movie",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "TV_serie_name",
+                            "type": "AMAZON.TVSeries",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.741962273665.1181978137326",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "¿Cómo se llama el programa que estás viendo?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "¿Y qué ves en la tele?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "¿Qué estás viendo ?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1077719766607.1368752108473",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Así que vas a ver la tele un rato ¿no?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.799952979185.1170519432461.109568016974",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Así que verás la tele ¿no?"
+                    }
+                ]
+            }
+        ]
+    }
+}
